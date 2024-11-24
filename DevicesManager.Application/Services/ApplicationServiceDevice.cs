@@ -46,9 +46,10 @@ namespace DevicesManager.Application.Services
             _deviceService.Update(deviceObj);
         }
 
-        public void Delete(int id)
+        public void Delete(DeviceDTO obj)
         {
-            _deviceService.Delete(id);
+            var deviceObj = _deviceMapper.MapperToEntity(obj);
+            _deviceService.Delete(deviceObj);
         }
 
         public void Dispose()

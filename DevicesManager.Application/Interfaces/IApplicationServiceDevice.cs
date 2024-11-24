@@ -42,8 +42,8 @@ namespace DevicesManager.Application.Interfaces
         /// <summary>
         /// Delete an device from the database
         /// </summary>
-        /// <param name="id">Device identifier</param>
-        void Delete(int id);
+        /// <param name="obj">Device to delete</param>
+        void Delete(DeviceDTO obj);
 
         /// <summary>
         /// Dispose the device context changes

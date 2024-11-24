@@ -34,8 +34,8 @@
         /// <summary>
         /// Delete an entity from the database
         /// </summary>
-        /// <param name="id">Entity identifier</param>
-        void Delete(int id);
+        /// <param name="obj">Entity to delete</param>
+        void Delete(TEntity obj);
 
         /// <summary>
         /// Dispose the entity context changes
