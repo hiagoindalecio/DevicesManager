@@ -4,7 +4,7 @@ using DevicesManager.Domain.Models;
 
 namespace DevicesManager.Infrastruture.CrossCutting.Adapter.Maps
 {
-    internal class DeviceMapper : IDeviceMapper
+    public class DeviceMapper : IDeviceMapper
     {
         public IEnumerable<DeviceDTO> MapperListOfDevices(IEnumerable<Device> devices)
         {

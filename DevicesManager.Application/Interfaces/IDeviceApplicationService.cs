@@ -5,7 +5,7 @@ namespace DevicesManager.Application.Interfaces
     /// <summary>
     /// Application service to manage devices
     /// </summary>
-    public interface IApplicationServiceDevice
+    public interface IDeviceApplicationService
     {
         /// <summary>
         /// Add a new device to the database

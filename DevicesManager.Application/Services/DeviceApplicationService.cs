@@ -5,12 +5,12 @@ using DevicesManager.Domain.Core.Interfaces.Services;
 
 namespace DevicesManager.Application.Services
 {
-    public class ApplicationServiceDevice : IApplicationServiceDevice
+    public class DeviceApplicationService : IDeviceApplicationService
     {
         private readonly IDeviceService _deviceService;
         private readonly IDeviceMapper _deviceMapper;
 
-        public ApplicationServiceDevice(IDeviceService deviceService, IDeviceMapper deviceMapper)
+        public DeviceApplicationService(IDeviceService deviceService, IDeviceMapper deviceMapper)
         {
             _deviceService = deviceService;
             _deviceMapper = deviceMapper;
