@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DevicesManager.Infrastruture.CrossCutting.Adapter\DevicesManager.Infrastruture.CrossCutting.Adapter.csproj" />
+    <ProjectReference Include="..\DevicesManager.Application.DTO\DevicesManager.Application.DTO.csproj" />
+    <ProjectReference Include="..\DevicesManager.Domain.Core\DevicesManager.Domain.Core.csproj" />
+  </ItemGroup>
+
+</Project>
