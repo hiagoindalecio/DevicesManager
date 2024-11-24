@@ -1,4 +1,6 @@
-﻿namespace DevicesManager.Domain.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DevicesManager.Domain.Models
 {
     /// <summary>
     /// Base model
@@ -8,6 +10,7 @@
         /// <summary>
         /// The entity identifier
         /// </summary>
+        [Column("id")]
         public int Id { get; set; }
     }
 }
