@@ -9,14 +9,17 @@
         /// The device identifier
         /// </summary>
         public int Id { get; set; }
+
         /// <summary>
         /// The device name
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
         /// The device brand name
         /// </summary>
         public string Brand { get; set; }
+
         /// <summary>
         /// The device creation date and time
         /// </summary>

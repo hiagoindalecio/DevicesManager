@@ -17,7 +17,7 @@ namespace DevicesManager.Infrastruture.CrossCutting.Adapter.Maps
                     Id = item.Id,
                     Name = item.Name,
                     Brand = item.Brand,
-                    CreationDate = item.CreationDate
+                    CreationDate = item.CreationDate.ToLocalTime()
                 };
 
                 devicesDTOs.Add(deviceDTO);
@@ -32,7 +32,7 @@ namespace DevicesManager.Infrastruture.CrossCutting.Adapter.Maps
                 Id = device.Id,
                 Name = device.Name,
                 Brand = device.Brand,
-                CreationDate = device.CreationDate
+                CreationDate = device.CreationDate.ToLocalTime()
             };
 
         public Device MapperToEntity(DeviceDTO deviceDTO)
@@ -40,8 +40,14 @@ namespace DevicesManager.Infrastruture.CrossCutting.Adapter.Maps
             {
                 Id = deviceDTO.Id,
                 Name = deviceDTO.Name,
-                Brand = deviceDTO.Brand,
-                CreationDate = deviceDTO.CreationDate
+                Brand = deviceDTO.Brand
+            };
+
+        public Device MapperToEntity(DeviceCreationDTO deviceCreationDTO)
+            => new()
+            {
+                Name = deviceCreationDTO.Name,
+                Brand = deviceCreationDTO.Brand
             };
     }
 }

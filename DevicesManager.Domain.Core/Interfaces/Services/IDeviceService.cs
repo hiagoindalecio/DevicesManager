@@ -12,6 +12,6 @@ namespace DevicesManager.Domain.Core.Interfaces.Services
         /// </summary>
         /// <param name="brandName">Device brand name</param>
         /// <returns>List of found devices</returns>
-        IEnumerable<Device> GetByBrad(string brandName);
+        IEnumerable<Device> GetByBrand(string brandName);
     }
 }

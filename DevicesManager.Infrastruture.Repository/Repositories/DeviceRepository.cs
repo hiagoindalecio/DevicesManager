@@ -4,19 +4,11 @@ using DevicesManager.Infrastructure.Data;
 
 namespace DevicesManager.Infrastruture.Repository.Repositories
 {
-    public class DeviceRepository : BaseRepository<Device>, IDeviceRepository
+    public class DeviceRepository(DevicesDBContext context) : BaseRepository<Device>(context), IDeviceRepository
     {
-        private readonly DevicesDBContext _context;
+        private readonly DevicesDBContext _context = context;
 
-        public DeviceRepository(DevicesDBContext context)
-            : base(context)
-        {
-            _context = context;
-        }
-
-        public IEnumerable<Device> GetByBrad(string brandName)
-        {
-            return _context.Set<Device>().Where(x => x.Brand == brandName);
-        }
+        public IEnumerable<Device> GetByBrand(string brandName)
+            => _context.Set<Device>().Where(x => x.Brand.Contains(brandName, StringComparison.CurrentCultureIgnoreCase));
     }
 }

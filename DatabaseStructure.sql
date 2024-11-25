@@ -12,7 +12,7 @@ CREATE TABLE devices (
 	id SERIAL NOT NULL,
     name varchar(40) NOT NULL,
 	brand varchar(40) NOT NULL,
-    creation_date TIMESTAMP DEFAULT NOW(),
+    creation_date TIMESTAMP DEFAULT (NOW() AT TIME ZONE 'utc'),
     CONSTRAINT device_PK PRIMARY KEY(id)
 );
 

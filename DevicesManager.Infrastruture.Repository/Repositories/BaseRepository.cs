@@ -10,53 +10,28 @@ namespace DevicesManager.Infrastruture.Repository.Repositories
 
         public virtual void Add(TEntity obj)
         {
-            try
-            {
-                _context.Set<TEntity>().Add(obj);
-                _context.SaveChanges();
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
+            _context.Set<TEntity>().Add(obj);
+            _context.SaveChanges();
         }
 
         public virtual TEntity GetById(int id)
-        {
-            return _context.Set<TEntity>().Find(id);
-        }
+            => _context.Set<TEntity>().Find(id);
 
         public virtual IEnumerable<TEntity> GetAll()
-        {
-            return [.. _context.Set<TEntity>()];
-        }
+            => [.. _context.Set<TEntity>()];
 
         public virtual void Update(TEntity obj)
         {
-            try
-            {
-                _context.Entry(obj).State = EntityState.Modified;
-                _context.SaveChanges();
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            _context.Entry(obj).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
-        public virtual void Delete(TEntity obj)
+        public virtual void Delete(int id)
         {
-            try
-            {
+            var obj = _context.Set<TEntity>().Find(id);
+            if (obj != null) {
                 _context.Set<TEntity>().Remove(obj);
                 _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
             }
         }
 

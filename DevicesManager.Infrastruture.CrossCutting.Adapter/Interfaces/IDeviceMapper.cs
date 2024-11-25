@@ -16,6 +16,13 @@ namespace DevicesManager.Infrastruture.CrossCutting.Adapter.Interfaces
         Device MapperToEntity(DeviceDTO deviceDTO);
 
         /// <summary>
+        /// Map the device data transfer object to an entity
+        /// </summary>
+        /// <param name="deviceCreationDTO">Device data transfer object</param>
+        /// <returns>Device entity</returns>
+        Device MapperToEntity(DeviceCreationDTO deviceCreationDTO);
+
+        /// <summary>
         /// Map a list of devices to a list of data transfer objects
         /// </summary>
         /// <param name="devices">Device entity</param>

@@ -6,83 +6,75 @@ namespace DevicesManager.Presentation.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class DeviceController : ControllerBase
+    public class DeviceController(ILogger<DeviceController> logger, IDeviceApplicationService deviceApplicationService) : ControllerBase
     {
-        private readonly IDeviceApplicationService _deviceApplicationService;
-        private readonly ILogger<DeviceController> _logger;
+        private readonly IDeviceApplicationService _deviceApplicationService = deviceApplicationService;
+        private readonly ILogger<DeviceController> _logger = logger;
 
-        public DeviceController(ILogger<DeviceController> logger, IDeviceApplicationService deviceApplicationService)
-        {
-            _logger = logger;
-            _deviceApplicationService = deviceApplicationService;
-        }
-
-        // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return Ok(_deviceApplicationService.GetAll());
+            var devices = _deviceApplicationService.GetAll(out string ErrorMessage);
+            if (string.IsNullOrEmpty(ErrorMessage))
+                return Ok(devices);
+            else
+                return BadRequest(ErrorMessage);
         }
 
-        // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return Ok(_deviceApplicationService.GetById(id));
+            var device = _deviceApplicationService.GetById(id, out string ErrorMessage);
+            if (string.IsNullOrEmpty(ErrorMessage))
+                return Ok(device);
+            else
+                return BadRequest(ErrorMessage);
         }
 
-        // POST api/values
-        [HttpPost]
-        public ActionResult Post([FromBody] DeviceDTO deviceDTO)
+        [HttpGet("get-by-brand/{brand}")]
+        public ActionResult<string> GetByBrand(string brand)
         {
-            try
-            {
-                if (deviceDTO == null)
-                    return NotFound();
-
-                _deviceApplicationService.Add(deviceDTO);
-                return Ok("The device has been created successfully!");
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            var device = _deviceApplicationService.GetByBrand(brand, out string ErrorMessage);
+            if (string.IsNullOrEmpty(ErrorMessage))
+                return Ok(device);
+            else
+                return BadRequest(ErrorMessage);
         }
 
-        // PUT api/values/5
+        [HttpPost]
+        public ActionResult Post([FromBody] DeviceCreationDTO deviceCreationDTO)
+        {
+            if (deviceCreationDTO == null)
+                return BadRequest("The device properties must be filled in!");
+
+            _deviceApplicationService.Add(deviceCreationDTO, out string ErrorMessage);
+            if (string.IsNullOrEmpty(ErrorMessage))
+                return Ok("The device has been created successfully!");
+            else
+                return BadRequest(ErrorMessage);
+        }
+
         [HttpPut]
         public ActionResult Put([FromBody] DeviceDTO deviceDTO)
         {
-            try
-            {
-                if (deviceDTO == null)
-                    return NotFound();
+            if (deviceDTO == null)
+                return BadRequest("The device properties must be filled in!");
 
-                _deviceApplicationService.Update(deviceDTO);
+            _deviceApplicationService.Update(deviceDTO, out string ErrorMessage);
+            if (string.IsNullOrEmpty(ErrorMessage))
                 return Ok("The device has been updated successfully!");
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            else
+                return BadRequest(ErrorMessage);
         }
 
-        // DELETE api/values/5
-        [HttpDelete()]
-        public ActionResult Delete([FromBody] DeviceDTO deviceDTO)
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                if (deviceDTO == null)
-                    return NotFound();
-
-                _deviceApplicationService.Delete(deviceDTO);
+            _deviceApplicationService.Delete(id, out string ErrorMessage);
+            if (string.IsNullOrEmpty(ErrorMessage))
                 return Ok("The device has been deleted successfully!");
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            else
+                return BadRequest(ErrorMessage);
         }
     }
 }
