@@ -6,13 +6,13 @@ namespace DevicesManager.Presentation.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class DeviceController(ILogger<DeviceController> logger, IDeviceApplicationService deviceApplicationService) : ControllerBase
+    public class DeviceController(IDeviceApplicationService deviceApplicationService) : ControllerBase
     {
+
         private readonly IDeviceApplicationService _deviceApplicationService = deviceApplicationService;
-        private readonly ILogger<DeviceController> _logger = logger;
 
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<DeviceDTO>?> Get()
         {
             var devices = _deviceApplicationService.GetAll(out string ErrorMessage);
             if (string.IsNullOrEmpty(ErrorMessage))
@@ -22,7 +22,7 @@ namespace DevicesManager.Presentation.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<DeviceDTO?> Get(int id)
         {
             var device = _deviceApplicationService.GetById(id, out string ErrorMessage);
             if (string.IsNullOrEmpty(ErrorMessage))
@@ -32,7 +32,7 @@ namespace DevicesManager.Presentation.Controllers
         }
 
         [HttpGet("get-by-brand/{brand}")]
-        public ActionResult<string> GetByBrand(string brand)
+        public ActionResult<DeviceDTO?> GetByBrand(string brand)
         {
             var device = _deviceApplicationService.GetByBrand(brand, out string ErrorMessage);
             if (string.IsNullOrEmpty(ErrorMessage))

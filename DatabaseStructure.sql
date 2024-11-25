@@ -15,5 +15,3 @@ CREATE TABLE devices (
     creation_date TIMESTAMP DEFAULT (NOW() AT TIME ZONE 'utc'),
     CONSTRAINT device_PK PRIMARY KEY(id)
 );
-
-insert into devices (name, brand) values('Smatphone', 'Xiaomi')

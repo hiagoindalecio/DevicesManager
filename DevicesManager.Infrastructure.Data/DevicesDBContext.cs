@@ -1,5 +1,6 @@
 ﻿using DevicesManager.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace DevicesManager.Infrastructure.Data
 {
@@ -10,6 +11,17 @@ namespace DevicesManager.Infrastructure.Data
         public DevicesDBContext(DbContextOptions<DevicesDBContext> options) : base(options) { }
 
         public DbSet<Device> Devices { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured) // For tests running
+            {
+                var config = new ConfigurationBuilder()
+                    .AddJsonFile("appsettings.test.json")
+                    .Build();
+                optionsBuilder.UseNpgsql(config.GetConnectionString("DevicesDBContext"));
+            }
+        }
 
         public override int SaveChanges()
         {
