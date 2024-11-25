@@ -10,7 +10,7 @@ namespace DevicesManager.Domain.Services.Services
         public virtual void Add(TEntity obj)
             => _repository.Add(obj);
 
-        public virtual TEntity GetById(int id)
+        public virtual TEntity? GetById(int id)
             => _repository.GetById(id);
 
         public virtual IEnumerable<TEntity> GetAll()

@@ -12,18 +12,20 @@ namespace DevicesManager.Infrastruture.Repository.Repositories
         {
             _context.Set<TEntity>().Add(obj);
             _context.SaveChanges();
+            _context.ChangeTracker.Clear();
         }
 
-        public virtual TEntity GetById(int id)
+        public virtual TEntity? GetById(int id)
             => _context.Set<TEntity>().Find(id);
 
         public virtual IEnumerable<TEntity> GetAll()
-            => [.. _context.Set<TEntity>()];
+            => [.. _context.Set<TEntity>().AsNoTracking()];
 
         public virtual void Update(TEntity obj)
         {
             _context.Entry(obj).State = EntityState.Modified;
             _context.SaveChanges();
+            _context.ChangeTracker.Clear();
         }
 
         public virtual void Delete(int id)
@@ -32,12 +34,11 @@ namespace DevicesManager.Infrastruture.Repository.Repositories
             if (obj != null) {
                 _context.Set<TEntity>().Remove(obj);
                 _context.SaveChanges();
+                _context.ChangeTracker.Clear();
             }
         }
 
         public virtual void Dispose()
-        {
-            _context.Dispose();
-        }
+            => _context.Dispose();
     }
 }

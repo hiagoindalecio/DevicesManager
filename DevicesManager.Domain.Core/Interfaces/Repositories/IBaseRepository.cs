@@ -17,7 +17,7 @@
         /// </summary>
         /// <param name="id">Entity identifier</param>
         /// <returns>Entity (if found)</returns>
-        TEntity GetById(int id);
+        TEntity? GetById(int id);
 
         /// <summary>
         /// Get all entities from the database

@@ -20,6 +20,7 @@ namespace DevicesManager.Infrastructure.Data
                     .AddJsonFile("appsettings.test.json")
                     .Build();
                 optionsBuilder.UseNpgsql(config.GetConnectionString("DevicesDBContext"));
+                AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             }
         }
 
