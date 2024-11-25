@@ -9,11 +9,9 @@ CREATE DATABASE devicesDB
     IS_TEMPLATE = False;
 
 CREATE TABLE devices (
-	did SERIAL NOT NULL,
-    dname varchar(40) NOT NULL,
-	dbrand varchar(40) NOT NULL,
-    dcreation_date TIMESTAMP DEFAULT NOW(),
-    CONSTRAINT device_PK PRIMARY KEY(did)
+	id SERIAL NOT NULL,
+    name varchar(40) NOT NULL,
+	brand varchar(40) NOT NULL,
+    creation_date TIMESTAMP DEFAULT (NOW() AT TIME ZONE 'utc'),
+    CONSTRAINT device_PK PRIMARY KEY(id)
 );
-
-insert into devices (dname, dbrand) values('Smatphone', 'Xiaomi')

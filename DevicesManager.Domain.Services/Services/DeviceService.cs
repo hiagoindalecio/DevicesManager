@@ -4,19 +4,11 @@ using DevicesManager.Domain.Models;
 
 namespace DevicesManager.Domain.Services.Services
 {
-    public class DeviceService : BaseService<Device>, IDeviceService
+    public class DeviceService(IDeviceRepository deviceRepository) : BaseService<Device>(deviceRepository), IDeviceService
     {
-        private readonly IDeviceRepository _deviceRepository;
+        private readonly IDeviceRepository _deviceRepository = deviceRepository;
 
-        public DeviceService(IDeviceRepository deviceRepository)
-            : base(deviceRepository)
-        {
-            _deviceRepository = deviceRepository;
-        }
-
-        public IEnumerable<Device> GetByBrad(string brandName)
-        {
-            return _deviceRepository.GetByBrad(brandName);
-        }
+        public IEnumerable<Device> GetByBrand(string brandName)
+            => _deviceRepository.GetByBrand(brandName);
     }
 }

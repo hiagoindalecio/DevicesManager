@@ -17,7 +17,7 @@
         /// </summary>
         /// <param name="id">Entity identifier</param>
         /// <returns>Entity (if found)</returns>
-        TEntity GetById(int id);
+        TEntity? GetById(int id);
 
         /// <summary>
         /// Get all entities from the database
@@ -34,7 +34,7 @@
         /// <summary>
         /// Delete an entity from the database
         /// </summary>
-        /// <param name="id">Entity identifier</param>
+        /// <param name="id">Device identifier</param>
         void Delete(int id);
 
         /// <summary>
