@@ -9,6 +9,6 @@ namespace DevicesManager.Infrastruture.Repository.Repositories
         private readonly DevicesDBContext _context = context;
 
         public IEnumerable<Device> GetByBrand(string brandName)
-            => _context.Set<Device>().Where(x => x.Brand.Contains(brandName, StringComparison.CurrentCultureIgnoreCase));
+            => _context.Set<Device>().Where(x => x.Brand.ToUpper().Contains(brandName.ToUpper()));
     }
 }
